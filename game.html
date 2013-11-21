@@ -1,52 +1,51 @@
-<html>    <!-- THANK YOU to StakOverflow user Dalal -->
-  <title>Javascript Game Example</title>  <!-- http://stackoverflow.com/a/7212336/1670542 -->
+<html>
+  <title> Javascript Game Example </title>
+
   <body onload="gameLoop()"
         onkeydown="keyDown(event)"
         onkeyup="keyUp(event)">
+
+    <p> Use the Arrows </p>
     <img  id='character' src='assets/face.png'
           style='position:absolute;height:64;width:64;'/>
-    <p> Use the Arrows </p>
+
     <p><a href="http://stackoverflow.com/a/7212336/1670542"> Original Source </a></p>
   </body>
-</html>
+</html>       <!-- Thank You to StackOverflow users KennyPeanuts and Dalal -->
 
 <style> p { padding-bottom: 4cm; } </style>
 
 <script type='text/javascript'>
-var xpos = 30;
-var ypos = 70;
+var xpos = 30
+var ypos = 70
+var upPressed = 0
+var downPressed = 0
+var leftPressed = 0
+var rightPressed = 0
 
-var upPressed = 0;
-var downPressed = 0;
-var leftPressed = 0;
-var rightPressed = 0;
+function keyDown(prs)  {
+  var code = prs.keyCode ? prs.keyCode : prs.which;
+  if (code == 38)  upPressed = 1
+  if (code == 40)  downPressed = 1
+  if (code == 37)  leftPressed = 1
+  if (code == 39)  rightPressed = 1  }
 
-function keyDown(e)  {
-  var code = e.keyCode ? e.keyCode : e.which;
-  if (code == 38) upPressed = 1;
-  if (code == 40) downPressed = 1;
-  if (code == 37) leftPressed = 1;
-  if (code == 39) rightPressed = 1;  }
+function keyUp(rls)  {
+  var code = rls.keyCode ? rls.keyCode : rls.which;
+  if (code == 38)  upPressed = 0
+  if (code == 40)  downPressed = 0
+  if (code == 37)  leftPressed = 0
+  if (code == 39)  rightPressed = 0  }
 
-function keyUp(e)  {
-  var code = e.keyCode ? e.keyCode : e.which;
-  if (code == 38) upPressed = 0;
-  if (code == 40) downPressed = 0;
-  if (code == 37) leftPressed = 0;
-  if (code == 39) rightPressed = 0;  }
+function gameLoop()  {                     // Game Logic
+  if (upPressed == 1)    ypos = ypos - 3
+  if (downPressed == 1)  ypos = ypos + 3
+  if (rightPressed == 1) xpos = xpos + 3
+  if (leftPressed == 1)  xpos = xpos - 3
 
-function gameLoop()  {
-  document.getElementById('character').style.left = xpos;
-  document.getElementById('character').style.top = ypos;
+  document.getElementById('character').style.left = xpos
+  document.getElementById('character').style.top = ypos
 
-  if (upPressed == 1)   // Game Logic
-    ypos = ypos - 3
-  if (downPressed == 1)
-    ypos = ypos + 3
-  if (rightPressed == 1)
-    xpos = xpos + 3
-  if (leftPressed == 1)
-    xpos = xpos - 3
+  setTimeout("gameLoop()",10)   }    // Loop every 10 ms
 
-  setTimeout("gameLoop()",10);  }   // Loop
 </script>
